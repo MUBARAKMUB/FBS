@@ -34,6 +34,14 @@ public class Booking {
 	
 	
 	
+	@Override
+	public String toString() {
+		return "Booking [booking_id=" + booking_id + ", flight=" + flight + ", booking_date=" + booking_date
+				+ ", passenger=" + passenger + ", total_amount=" + total_amount + ", booking_cancelled="
+				+ booking_cancelled + ", checked_in=" + checked_in + ", payment_completed=" + payment_completed + "]";
+	}
+
+
 	public Booking(long booking_id, List<Flight> flight, LocalDate booking_date, List<Passenger> passenger,
 			double total_amount, boolean booking_cancelled, boolean checked_in, boolean payment_completed) {
 		super();

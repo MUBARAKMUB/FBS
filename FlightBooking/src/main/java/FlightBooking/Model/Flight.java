@@ -21,6 +21,8 @@ public class Flight {
 	 @DBRef
 	  private List<FlightData> flight;
 	 
+	 
+	 
 	public Flight() {
 		super();
 	}

@@ -16,4 +16,6 @@ public interface BookingRepository extends MongoRepository<Booking,Long>{
 	@Query("{'departue_date' : :#{#departure_date}}") 
 	  List<Booking> findByDate(@Param("departure_date") Date departure_date);
 
+	@Query("{'booking_id' : :#{#booking_id}}") 
+	Booking findById1(@Param("booking_id") long booking_id);
 }

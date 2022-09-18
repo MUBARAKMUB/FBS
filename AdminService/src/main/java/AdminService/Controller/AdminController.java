@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import AdminService.Exception.FlightNotFoundException;
 import AdminService.Model.Flight;
 import AdminService.Model.FlightData;
+import AdminService.Model.User;
 import AdminService.Service.AdminService;
 
 @RestController
@@ -30,11 +31,24 @@ public class AdminController {
 	@Autowired
 	AdminService fserv;
 
-	@GetMapping("/access/allflights")
+	@GetMapping("/allflights")
 	public Flight[] getAllFlights() {
+		
 		Flight[] flight = resttemplate.getForObject("http://localhost:8080/Search/allFlights", Flight[].class);
 		return flight;
 	}
+	
+//	@GetMapping("/{id}/allflights")
+//	public User getUser(@PathVariable ("id") String id) {
+//		User use=resttemplate.getForObject("http://localhost:8079/api/auth/"+id,User.class);
+//		return use;
+//	}
+//	public Flight[] getAllFlights() {
+//		Flight[] flight = resttemplate.getForObject("http://localhost:8080/Search/allFlights", Flight[].class);
+//		return flight;
+//	}
+	
+	
 
 	@GetMapping("/access/{from}/{to}/{departure_Date}")
 	public Flight[] getFlightByAll(@PathVariable("from") String from, @PathVariable("to") String to,

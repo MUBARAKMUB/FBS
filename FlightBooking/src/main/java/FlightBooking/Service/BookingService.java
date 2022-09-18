@@ -21,10 +21,12 @@ public class BookingService {
 	}
 
 
-	public Optional<Booking> findById1(long booking_id) {
-		return bookingrepository.findById((long) booking_id);
+//	public Optional<Booking> findById1(long booking_id) {
+	//	return bookingrepository.findById((long) booking_id);
+		//}
+	public Booking findById1(long booking_id) {
+		return bookingrepository.findById1((long) booking_id);
 		}
-	
 	
 	public boolean findById(long booking_id) {
 		boolean present =bookingrepository.findById((long) booking_id).isPresent();

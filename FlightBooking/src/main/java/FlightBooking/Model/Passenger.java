@@ -15,6 +15,16 @@ public class Passenger {
 	public Passenger() {
 	}
 
+	
+	
+	@Override
+	public String toString() {
+		return "Passenger [passenger_id=" + passenger_id + ", passenger_name=" + passenger_name + ", passenger_age="
+				+ passenger_age + ", passenger_seat=" + passenger_seat + ", amount=" + amount + "]";
+	}
+
+
+
 	public Passenger(int passenger_id, String passenger_name, int passenger_age, int passenger_seat, double amount) {
 		super();
 		this.passenger_id = passenger_id;

@@ -38,6 +38,9 @@ public class BookingController {
 	private BookingService bookingservice;
 	
 	@Autowired
+	private BookingRepository bookingrepository;
+	
+	@Autowired
 	RestTemplate resttemplate;
 	
 	Passenger passenger = new Passenger(); 
@@ -62,6 +65,8 @@ public class BookingController {
 			//seat_No(booking);
 			log.info("Making the booking with pnr: " +booking.getBooking_id());
 			bookingservice.addBookings(booking);
+		
+			
 		 return "Booked Successfully, Your booking id is "+booking.getBooking_id();
 		}
 		log.error("Booking already present");
@@ -111,7 +116,7 @@ public class BookingController {
 	
 	
 	
-	@GetMapping("/BookedFlight/{booking_id}")
+/*	@GetMapping("/BookedFlight/{booking_id}")
 	public Optional<Booking> getBooking (@PathVariable("booking_id") long booking_id){
 	try {	log.info("getting Ticket: "+booking_id);
 		return bookingservice.findById1(booking_id);}
@@ -119,7 +124,18 @@ public class BookingController {
 		log.error(e.toString());
 	return null;}
 
+	}*/
+	
+	@GetMapping("/{booking_id}")
+	public Booking getBooking (@PathVariable("booking_id") long booking_id){
+	try {	log.info("getting Ticket: "+booking_id);
+		return bookingrepository.findById1(booking_id);}
+	catch(Exception e){
+		log.error(e.toString());
+	return null;
+		}
 	}
+
 	
 	
 	@GetMapping("/AllBookings")
@@ -135,7 +151,7 @@ public class BookingController {
 	// For user to Cancel Booking OR Self Check-In 
 	@PutMapping("/booking/{booking_id}")
 	public Booking updateBooking(@RequestBody Booking booking,@PathVariable("booking_id") long pnr) {
-		Booking dbResponse=bookingservice.findById1(pnr).get();
+		Booking dbResponse=bookingservice.findById1(pnr);
 		dbResponse.setBooking_cancelled(booking.isBooking_cancelled());
 		dbResponse.setChecked_in(booking.isChecked_in());
 		log.info("Saving Changes In Booked Ticket Of Booking Cancelled/ CheckIn: "+pnr);

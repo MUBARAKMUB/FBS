@@ -14,6 +14,13 @@ public class FlightData {
 	private String arrival_Time;
 	
 	
+	
+	
+	@Override
+	public String toString() {
+		return "FlightData [flight_id=" + flight_id + ", flight_No=" + flight_No + ", departure_Time=" + departure_Time
+				+ ", arrival_Time=" + arrival_Time + "]";
+	}
 	public FlightData() {
 		super();
 		// TODO Auto-generated constructor stub
