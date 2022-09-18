@@ -156,7 +156,7 @@ public class AuthController {
 	
 	
 	
-	@GetMapping("/find/{from}/{to}/{departure_date}")
+	@GetMapping("{id}/find/{from}/{to}/{departure_date}")
 	public Flight[] getFlightByAll(@PathVariable String from,@PathVariable String to,@PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departure_date){
 		Flight[] flight=resttemplate.getForObject("http://localhost:8080/Search/find/"+from+"/"+to+"/"+departure_date, Flight[].class);
 		return flight;
