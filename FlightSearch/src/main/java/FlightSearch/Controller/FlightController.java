@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
 import FlightSearch.Exception.FlightNotFoundException;
+import FlightSearch.Model.Booking;
 import FlightSearch.Model.Flight;
 import FlightSearch.Model.FlightData;
 import FlightSearch.Service.FlightService;
@@ -28,6 +31,10 @@ public class FlightController {
 
 	@Autowired
 	private FlightService fserv;
+	
+	@Autowired
+	RestTemplate resttemplate;
+
 
 	@GetMapping("/allFlights")
 	public List<Flight> getAllFlights() {
@@ -50,6 +57,12 @@ public class FlightController {
 		return fserv.getFlightData();
 	}
 
+	
+	@GetMapping("/find/{booking_id}")
+	public Booking getBooking(@PathVariable("booking_id") long booking_id) {
+		Booking booking = resttemplate.getForObject("http://localhost:8081/booking/"+ booking_id, Booking.class);
+		return booking;
+	}
 
 
 	

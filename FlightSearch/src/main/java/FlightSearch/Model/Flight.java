@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import FlightSearch.Model.FlightData;
 
-@Document(collection="basicdetails")
+@Document(collection="flights")
 public class Flight {
 	@Id
 	 private String id;

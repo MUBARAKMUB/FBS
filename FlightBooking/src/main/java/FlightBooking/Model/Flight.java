@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Document(collection="basicdetails")
+@Document(collection="flights")
 public class Flight {
 	@Id
 	 private String id;

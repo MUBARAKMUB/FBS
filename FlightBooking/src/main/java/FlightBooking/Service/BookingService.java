@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import FlightBooking.Exception.BookingDataNotFoundException;
 import FlightBooking.Model.Booking;
 import FlightBooking.Repository.BookingRepository;
 
@@ -16,17 +17,22 @@ public class BookingService {
 	private BookingRepository bookingrepository;
 	
 
-	public void addBookings(Booking booking) {
-		bookingrepository.save(booking);	
+	public Booking addBookings(Booking booking) {
+		return bookingrepository.save(booking);
 	}
 
 
 //	public Optional<Booking> findById1(long booking_id) {
 	//	return bookingrepository.findById((long) booking_id);
 		//}
-	public Booking findById1(long booking_id) {
-		return bookingrepository.findById1((long) booking_id);
+	public Booking findById1(long booking_id) throws BookingDataNotFoundException {
+		Booking b= bookingrepository.findById1((long) booking_id);
+		if(b != null) {
+			return b;
+		}else {
+			throw new BookingDataNotFoundException("Booking data is not found with id: " + booking_id);
 		}
+	}
 	
 	public boolean findById(long booking_id) {
 		boolean present =bookingrepository.findById((long) booking_id).isPresent();
@@ -39,8 +45,8 @@ public class BookingService {
 		}
 
 
-	public void save(Booking dbResponse) {
-		bookingrepository.save(dbResponse);
+	public Booking save(Booking dbResponse) {
+	return	bookingrepository.save(dbResponse);
 		
 	}
 

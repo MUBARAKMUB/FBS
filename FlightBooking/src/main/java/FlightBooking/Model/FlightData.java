@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="flightdetails")
+@Document(collection="FlightData")
 public class FlightData {
 	@Id
 	private String flight_id;

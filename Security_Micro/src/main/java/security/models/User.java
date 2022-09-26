@@ -51,6 +51,13 @@ public class User {
 
 	
 
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	public User(String firstName, String lastName, String username, String email, String password, String gender, String phoneNo) {
 		super();
 		this.firstName = firstName;
@@ -61,6 +68,8 @@ public class User {
 		this.gender = gender;
 		this.phoneNo = phoneNo;
 	}
+
+	
 
 	public String getId() {
 		return id;

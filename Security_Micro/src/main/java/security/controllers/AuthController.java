@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import security.models.Flight;
+import security.Exception.UserNotFoundException;
 import security.models.ERole;
 import security.models.Role;
 import security.models.User;
@@ -42,6 +43,7 @@ import security.repository.RoleRepository;
 import security.repository.UserRepository;
 import security.security.jwt.JwtUtils;
 import security.security.services.UserDetailsImpl;
+import security.security.services.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -62,9 +64,11 @@ public class AuthController {
 
 	@Autowired
 	JwtUtils jwtUtils;
-	
+
 	@Autowired
 	RestTemplate resttemplate;
+	
+
 
 	/*
 	 * @Autowired UserService userService;
@@ -98,9 +102,9 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(
-				new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getFirstName(), userDetails.getLastname(), 
-						userDetails.getGender(), userDetails.getPhoneNo(),userDetails.getEmail(), roles));
+		return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),
+				userDetails.getFirstName(), userDetails.getLastname(), userDetails.getGender(),
+				userDetails.getPhoneNo(), userDetails.getEmail(), roles));
 	}
 
 	@PostMapping("/signup")
@@ -114,8 +118,9 @@ public class AuthController {
 		}
 
 		// Create new user's account
-		User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
-				encoder.encode(signUpRequest.getPassword()),signUpRequest.getGender(), signUpRequest.getPhoneNo());
+		User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(), signUpRequest.getUsername(),
+				signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()), signUpRequest.getGender(),
+				signUpRequest.getPhoneNo());
 
 		Set<String> strRoles = signUpRequest.getRoles();
 		Set<Role> roles = new HashSet<>();
@@ -124,46 +129,31 @@ public class AuthController {
 			Role userRole = roleRepository.findByName(ERole.ROLE_USER)
 					.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
 			roles.add(userRole);
-		} 
-	/*else {
-			strRoles.forEach(role -> {
-				switch (role) {
-				case "admin":
-					Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(adminRole);
-
-					break;
-				default:
-					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(userRole);
-				}
-			});
-		} */
+		}
+		/*
+		 * else { strRoles.forEach(role -> { switch (role) { case "admin": Role
+		 * adminRole = roleRepository.findByName(ERole.ROLE_ADMIN) .orElseThrow(() ->
+		 * new RuntimeException("Error: Role is not found.")); roles.add(adminRole);
+		 * 
+		 * break; default: Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+		 * .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+		 * roles.add(userRole); } }); }
+		 */
 
 		user.setRoles(roles);
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
-	
-	@GetMapping("/allflights")
-	public Flight[] getAllFlights(){
-		Flight[] flight= resttemplate.getForObject("http://localhost:8080/Search/allFlights", Flight[].class);
-		return flight;
-	}
-	
-//	@GetMapping("/{id}")
-//	public Optional<User> getUser(@PathVariable ("id") String id){
-//		return userRepository.findById(id);
-//		}
-	
-	
-	
+
 	@GetMapping("/find/{from}/{to}/{departure_date}")
-	public Flight[] getFlightByAll(@PathVariable String from,@PathVariable String to,@PathVariable  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departure_date){
-		Flight[] flight=resttemplate.getForObject("http://localhost:8080/Search/find/"+from+"/"+to+"/"+departure_date, Flight[].class);
+	public Flight[] getFlightByAll(@PathVariable String from, @PathVariable String to,
+			@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departure_date) {
+		Flight[] flight = resttemplate.getForObject(
+				"http://localhost:8080/Search/find/" + from + "/" + to + "/" + departure_date, Flight[].class);
 		return flight;
 	}
+	
+	
+	
 }

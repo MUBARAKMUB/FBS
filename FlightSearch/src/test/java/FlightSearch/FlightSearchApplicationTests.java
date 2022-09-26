@@ -33,7 +33,7 @@ class FlightSearchApplicationTests {
 	assertEquals(flightdata,fdrepo.save(flightdata));
        }
        
-	     @Test
+	    @Test
 		public void deletebyFlightDataTest() throws FlightNotFoundException {
 		FlightData flightdata=new FlightData("1","104","10:20AM","10:00AM");
 		fdrepo.deleteById("id");
