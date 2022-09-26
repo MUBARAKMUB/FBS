@@ -21,11 +21,11 @@ public class User {
 	@NotBlank
 	@Size(max = 20)
 	private String firstName;
-	
+
 	@NotBlank
 	@Size(max = 20)
 	private String lastName;
-	
+
 	@NotBlank
 	@Size(max = 20)
 	private String username;
@@ -38,27 +38,24 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
-	
+
 	@NotBlank
 	private String gender;
 
 	@NotBlank
 	@Pattern(regexp = "(^$|[0-9]{10})")
 	private String phoneNo;
-	
+
 	@DBRef
 	private Set<Role> roles = new HashSet<>();
-
-	
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-	public User(String firstName, String lastName, String username, String email, String password, String gender, String phoneNo) {
+	public User(String firstName, String lastName, String username, String email, String password, String gender,
+			String phoneNo) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -68,8 +65,6 @@ public class User {
 		this.gender = gender;
 		this.phoneNo = phoneNo;
 	}
-
-	
 
 	public String getId() {
 		return id;
