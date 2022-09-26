@@ -55,13 +55,16 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public void deleteby(String id) throws FlightNotFoundException {
+	public String deleteby(String id) throws FlightNotFoundException {
 		frepo.deleteById(id);
+		return "flight has been deleted";
 	}
 
 	@Override
-	public void deletebyFlightData(String id) throws FlightNotFoundException {
-		fdrepo.deleteById(id);
+	public String deletebyFlightData(String id) throws FlightNotFoundException {
+		 fdrepo.deleteById(id);
+		return "flightdata deleted";
+		
 	}
 
 	

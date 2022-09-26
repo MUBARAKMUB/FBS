@@ -18,7 +18,7 @@ public interface AdminService {
 
 	Flight get(String id) throws FlightNotFoundException;
 
-	void deleteby(String id) throws FlightNotFoundException;
+	String deleteby(String id) throws FlightNotFoundException;
 
-	void deletebyFlightData(String id) throws FlightNotFoundException;
+	String deletebyFlightData(String id) throws FlightNotFoundException;
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import AdminService.Exception.FlightNotFoundException;
+import AdminService.Model.Booking;
 import AdminService.Model.Flight;
 import AdminService.Model.FlightData;
 import AdminService.Model.User;
@@ -33,7 +34,6 @@ public class AdminController {
 
 	@GetMapping("/allflights")
 	public Flight[] getAllFlights() {
-		
 		Flight[] flight = resttemplate.getForObject("http://localhost:8080/Search/allFlights", Flight[].class);
 		return flight;
 	}
@@ -53,8 +53,7 @@ public class AdminController {
 	@GetMapping("/access/{from}/{to}/{departure_Date}")
 	public Flight[] getFlightByAll(@PathVariable("from") String from, @PathVariable("to") String to,
 			@PathVariable("departure_Date") String departure_Date) {
-		Flight[] flight = resttemplate.getForObject(
-				"http://localhost:8080/Search/find/" + from + "/" + to + "/" + departure_Date, Flight[].class);
+		Flight[] flight = resttemplate.getForObject("http://localhost:8080/Search/find/" + from + "/" + to + "/" + departure_Date, Flight[].class);
 		return flight;
 	}
 
@@ -133,7 +132,14 @@ public class AdminController {
 	public String deletebyFlightData(@PathVariable String flight_id) throws FlightNotFoundException {
 		fserv.deletebyFlightData(flight_id);
 		return "flightdata deleted";
-
+	}
+	
+	
+	@GetMapping("/getallbookings")
+	public Booking[] getAllBookings() {
+		Booking[] booking = resttemplate.getForObject(
+				"http://localhost:8081/booking/AllBookings", Booking[].class);
+		return booking;
 	}
 
 
