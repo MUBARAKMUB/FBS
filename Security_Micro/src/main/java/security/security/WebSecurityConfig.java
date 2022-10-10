@@ -3,6 +3,7 @@ package security.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -61,6 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				 * hasAuthority("ADMIN")
 				 * .antMatchers("/api/auth/updateuser","/api/auth/**").hasAuthority("USER")
 				 */
+				.antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security",
+                        "/swagger-ui.html", "/webjars/**", "/swagger-resources/configuration/ui", "/swagger-ui.html",
+                        "/swagger-resources/configuration/security")
+                .permitAll()
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
+				.antMatchers("/swagger-ui.html#/**", "/v2/api-docs").permitAll()
 				.antMatchers("/api/auth/**").permitAll().antMatchers("/api/test/**").permitAll().anyRequest()
 				.authenticated();
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

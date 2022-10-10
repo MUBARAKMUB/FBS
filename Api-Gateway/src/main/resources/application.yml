@@ -1,0 +1,41 @@
+server:
+  port: 8000
+  
+eureka:
+  instance:
+    hostname: localhost
+    
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*"
+      routes:
+        - id: SecurityMicro
+          uri: http://localhost:8079
+          predicates:
+            - Path=/api/auth/**
+        - id: Flight-Search
+          uri: http://localhost:8080
+          predicates:
+            - Path=/Search/**
+        - id: AdminService
+          uri: http://localhost:8078
+          predicates:
+            - Path=/admin/**
+        - id: Flight-Booking
+          uri: http://localhost:8081
+          predicates:
+            - Path=/booking/**
+        - id: CheckIn
+          uri: http://localhost:8083
+          predicates:
+            - Path=/checkin/**

@@ -24,6 +24,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -36,10 +40,12 @@ import security.controllers.AuthController;
 import security.models.ERole;
 import security.models.Role;
 import security.models.User;
+import security.payload.request.LoginRequest;
 import security.payload.request.SignupRequest;
 import security.payload.response.MessageResponse;
 import security.repository.RoleRepository;
 import security.repository.UserRepository;
+import security.security.jwt.JwtUtils;
 
 @ComponentScan(basePackages = "security")
 @AutoConfigureMockMvc
@@ -68,7 +74,7 @@ public class AuthControllerTest {
 
 	@InjectMocks
 	AuthController authController;
-
+	
 //	@MockBean
 //	ERole erole;
 //	
@@ -82,7 +88,7 @@ public class AuthControllerTest {
 		when(userRepository.existsByEmail(signUpRequest.getEmail())).thenReturn(false);
 		Optional<Role> roles = Optional.of(new Role(ERole.ROLE_USER));
 		when(roleRepository.findByName(ERole.ROLE_USER)).thenReturn(roles);
-		User user = new User("Mubarak", "LNU", "Mub", "mubarak@13122000@gmail.com", "yenoondhkodu", "Male",
+		User user = new User("Mubarak", "LNU", "Mub", "mubarak13122000@gmail.com", "yenoondhkodu", "Male",
 				"9876543210");
 		when(userRepository.save(user)).thenReturn(user);
 		MessageResponse messageResponse = new MessageResponse("User registered successfully!");
@@ -90,5 +96,8 @@ public class AuthControllerTest {
 				authController.registerUser(signUpRequest).getStatusCode());
 
 	}
-
+	
+	
+	
+	
 }

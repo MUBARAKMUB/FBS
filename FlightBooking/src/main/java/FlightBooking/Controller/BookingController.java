@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +27,11 @@ import FlightBooking.Model.FlightData;
 import FlightBooking.Model.Passenger;
 import FlightBooking.Repository.BookingRepository;
 import FlightBooking.Service.BookingService;
-import FlightBooking.Service.ExceptionService;
 
 //@RequestMapping("/{user_id}")
 @RestController
 @RequestMapping("/booking")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class BookingController {
 
 	@Autowired
@@ -66,10 +67,11 @@ public class BookingController {
 			log.info("Making the booking with pnr: " + booking.getBooking_id());
 			bookingservice.addBookings(booking);
 
-			return "Booked Successfully, Your booking id is " + booking.getBooking_id();
+		//	return "Booked Successfully, Your booking id is " + booking.getBooking_id();
 		}
-		log.error("Booking already present");
-		return "Booked already";
+//		log.error("Booking already present");
+//		return "Booked already";
+		return null;
 	}
 
 //	private int setavailable(Flight flight) {

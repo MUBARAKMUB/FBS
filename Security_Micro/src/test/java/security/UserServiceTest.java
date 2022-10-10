@@ -30,7 +30,7 @@ public class UserServiceTest {
 	
 	@Test
 	@Order(1)
-	public void test_updateflight() throws UserNotFoundException{
+	public void test_updateUser() throws UserNotFoundException{
 		Optional<User> user= Optional.of(new User( "Mubarak", "LNU", "Mub", "mubarak@13122000@gmail.com", "yenoondhkodu", "Male","9876543210"));
 	String id="1";
 		when(userRepository.findById(id)).thenReturn(user);

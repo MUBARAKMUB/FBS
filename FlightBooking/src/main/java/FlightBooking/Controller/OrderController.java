@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -88,8 +89,15 @@ public class OrderController {
 			  HttpStatus.BAD_REQUEST);
 			  }
 		return ResponseEntity.ok(new ApiResponse(true, paymentResponse.getRazorpayPaymentId()));
+		
 	}
 
+	@PutMapping("/booking/{booking_id}")
+	public String updateBooking(Booking booking, @PathVariable("booking_id") long pnr) {
+		booking.setPayment_completed(true);
+		return ("Payment is done:" + pnr);
+	}
+	
 	private OrderResponse getOrderResponse(String orderId, String amountInPaise) {
 	 
 		OrderResponse razorPay = new OrderResponse();

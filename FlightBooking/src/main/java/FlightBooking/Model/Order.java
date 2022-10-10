@@ -39,8 +39,8 @@ public class Order implements Serializable {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public String setUserId(String userId) {
+		return this.userId = userId;
 	}
 
 	public String getRazorpayPaymentId() {
@@ -55,8 +55,8 @@ public class Order implements Serializable {
 		return razorpayOrderId;
 	}
 
-	public void setRazorpayOrderId(String razorpayOrderId) {
-		this.razorpayOrderId = razorpayOrderId;
+	public String setRazorpayOrderId(String razorpayOrderId) {
+	return	this.razorpayOrderId = razorpayOrderId;
 	}
 
 	public String getRazorpaySignature() {

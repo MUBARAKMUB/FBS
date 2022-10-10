@@ -66,6 +66,20 @@ public class User {
 		this.phoneNo = phoneNo;
 	}
 
+
+
+	public User(String id,  String firstName,  String lastName, String username,  String email, String password,  String gender,String phoneNo) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.gender = gender;
+		this.phoneNo = phoneNo;
+	}
+
 	public String getId() {
 		return id;
 	}
