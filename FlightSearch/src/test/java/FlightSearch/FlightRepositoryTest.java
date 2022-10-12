@@ -40,7 +40,7 @@ public class FlightRepositoryTest {
 				flightdatas);
 		flightRepository.save(flight1);
 		List<Flight> flight = flightRepository.findAll();
-		assertEquals(4, flight.size());
+		assertEquals(8, flight.size());
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class FlightRepositoryTest {
 		FlightData flightdata1 = new FlightData("63276510499571332a277e0d", "BH333", "5:40am", "11:50am");
 		flightDataRepository.save(flightdata1);
 		List<FlightData> flightdata = flightDataRepository.findAll();
-		assertEquals(4, flightdata.size());
+		assertEquals(8, flightdata.size());
 	}
 	
 	@Test
@@ -62,7 +62,7 @@ public class FlightRepositoryTest {
 		flightRepository.save(flight1);
 		List<Flight> flight = flightRepository.findByFromandTo("Hyderabad", "Mumbai");
 
-		assertEquals(1, flight.size());
+		assertEquals(2, flight.size());
 	}
 	
 	@Test

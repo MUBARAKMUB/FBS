@@ -60,7 +60,7 @@ public class AdminRepositoryTest {
 		FlightData flightdata1 = new FlightData("63276510499571332a277e0d", "BH333", "5:40am", "11:50am");
 		adminFlightDataRepository.save(flightdata1);
 		List<FlightData> flightdata = adminFlightDataRepository.findAll();
-		assertEquals(4, flightdata.size());
+		assertEquals(8, flightdata.size());
 	}
 
 	@Test
@@ -71,7 +71,7 @@ public class AdminRepositoryTest {
 		Flight flight1 = new Flight("6327e968de59757bd5dbb74e", "Hyderabad", "Mumbai", 6650, 52, 23, "2022-09-22",flightdatas);
 		adminFlightRepository.save(flight1);
 		List<Flight> flight = adminFlightRepository.findAll();
-		assertEquals(4, flight.size());
+		assertEquals(8, flight.size());
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class AdminRepositoryTest {
 		adminFlightDataRepository.save(flightdata1);
 	 adminFlightDataRepository.deleteById("6327dfd0de59757bd5dbb84c");
 	 List<FlightData> flightdata = adminFlightDataRepository.findAll();
-		assertEquals(4, flightdata.size());
+		assertEquals(8, flightdata.size());
 	
 	}
 	
@@ -122,7 +122,7 @@ public class AdminRepositoryTest {
 		adminFlightRepository.save(flight1);
 	 adminFlightRepository.deleteById("6327e968de59757bd5dbb84e");
 	 List<Flight> flight = adminFlightRepository.findAll();
-		assertEquals(4, flight.size());
+		assertEquals(8, flight.size());
 	
 	}
 	
