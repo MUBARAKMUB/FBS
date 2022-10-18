@@ -32,7 +32,7 @@ import FlightBooking.config.RazorPayClientConfig;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/booking/api")
 @CrossOrigin("*")
 public class OrderController {
 

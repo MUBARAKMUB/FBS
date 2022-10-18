@@ -12,13 +12,17 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	public User updateby(String id) throws UserNotFoundException {
-		return userRepository.findById(id)
-				.orElseThrow(()-> new UserNotFoundException ("user details not found"));
-	}
+//	public User updateby(String id) throws UserNotFoundException {
+//		return userRepository.findById(id)
+//				.orElseThrow(()-> new UserNotFoundException ("user details not found"));
+//	}
 
-	public String save(User user) {
-		return  userRepository.save(user).getUsername()+": Your profile has been updated!";
+//	public String save(User user) {
+//		return  userRepository.save(user).getUsername()+": Your profile has been updated!";
+//	}
+	
+	public User registerUser(User user) {
+		return userRepository.save(user);
 	}
 
 	

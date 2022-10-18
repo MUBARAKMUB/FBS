@@ -46,6 +46,7 @@ import security.payload.response.MessageResponse;
 import security.repository.RoleRepository;
 import security.repository.UserRepository;
 import security.security.jwt.JwtUtils;
+import security.security.services.UserService;
 
 @ComponentScan(basePackages = "security")
 @AutoConfigureMockMvc
@@ -62,6 +63,10 @@ public class AuthControllerTest {
 
 	@Mock
 	BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Mock
+	UserService userService;
+
 
 	@Autowired
 	MockMvc mockMvc;
@@ -88,15 +93,13 @@ public class AuthControllerTest {
 		when(userRepository.existsByEmail(signUpRequest.getEmail())).thenReturn(false);
 		Optional<Role> roles = Optional.of(new Role(ERole.ROLE_USER));
 		when(roleRepository.findByName(ERole.ROLE_USER)).thenReturn(roles);
-		User user = new User("Mubarak", "LNU", "Mub", "mubarak13122000@gmail.com", "yenoondhkodu", "Male",
-				"9876543210");
-		when(userRepository.save(user)).thenReturn(user);
+		User user = new User("Soundarya", "S", "soundu", "soundu@gmail.com", "**", "Female", "9046372873");
+		when(userService.registerUser(user)).thenReturn(user);
 		MessageResponse messageResponse = new MessageResponse("User registered successfully!");
 		assertEquals(ResponseEntity.ok(messageResponse).getStatusCode(),
 				authController.registerUser(signUpRequest).getStatusCode());
 
 	}
-	
 	
 	
 	

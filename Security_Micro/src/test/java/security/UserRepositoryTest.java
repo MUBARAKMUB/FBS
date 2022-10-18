@@ -59,15 +59,15 @@ public class UserRepositoryTest {
 		
 	}
 	
-	@Test
-	@Order(2)
-	public void updateUser() {
-	Optional<User>	a=userRepository.findById("6332eb3c01cff928b892c190");
-		User user = new User("6332eb3c01cff928b892c190","Mubarak", "LN", "Mu123", "mubarak13122000@gmail.com", "yenoondhkodu", "Male","9876543210");
-		userRepository.save(user);
-		assertEquals(a.get().getUsername(), user.getUsername());
-		
-	}
+//	@Test
+//	@Order(2)
+//	public void updateUser() {
+//	Optional<User>	a=userRepository.findById("6332eb3c01cff928b892c190");
+//		User user = new User("6332eb3c01cff928b892c190","Mubarak", "LN", "Mu123", "mubarak13122000@gmail.com", "yenoondhkodu", "Male","9876543210");
+//		userRepository.save(user);
+//		assertEquals(a.get().getUsername(), user.getUsername());
+//		
+//	}
 	
 	
 	

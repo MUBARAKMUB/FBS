@@ -55,6 +55,9 @@ public class AuthController {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -141,8 +144,8 @@ public class AuthController {
 		 */
 
 		user.setRoles(roles);
-		userRepository.save(user);
-
+	//	userRepository.save(user);
+		userService.registerUser(user);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}
 

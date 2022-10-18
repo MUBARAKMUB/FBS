@@ -28,13 +28,21 @@ public class UserServiceTest {
 	@InjectMocks
 	UserService userService;
 	
+//	@Test
+//	@Order(1)
+//	public void test_updateUser() throws UserNotFoundException{
+//		Optional<User> user= Optional.of(new User( "Mubarak", "LNU", "Mub", "mubarak@13122000@gmail.com", "yenoondhkodu", "Male","9876543210"));
+//	String id="1";
+//		when(userRepository.findById(id)).thenReturn(user);
+//		assertEquals(user.get(),userService.updateby(id));
+//	}
+	
 	@Test
 	@Order(1)
-	public void test_updateUser() throws UserNotFoundException{
-		Optional<User> user= Optional.of(new User( "Mubarak", "LNU", "Mub", "mubarak@13122000@gmail.com", "yenoondhkodu", "Male","9876543210"));
-	String id="1";
-		when(userRepository.findById(id)).thenReturn(user);
-		assertEquals(user.get(),userService.updateby(id));
+	public void test_registerUser() {
+		User user= new User("Soundarya", "S", "soundu", "soundu@gmail.com", "**", "Female", "9046372873");
+		when(userRepository.save(user)).thenReturn(user);
+		assertEquals(user.getUsername(),userService.registerUser(user).getUsername());
 	}
 	
 }
